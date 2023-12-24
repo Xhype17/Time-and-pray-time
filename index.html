@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>Jadwal Sholat & Jam</title>
+<style>
+    body {
+        font-family: 'Bebas Neue', sans-serif;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+    }
+    #clock, #date {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: powderblue;
+        background-color: grey;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 10;
+        backdrop-filter: blur(10px);
+        
+        
+    }
+    #prayTime {
+        font-size: 2rem;
+        color: white;
+    }
+</style>
+</head>
+<body>
+<div id="clock"></div>
+<div id="date"></div>
+<div id="prayTime"></div>
+
+<script>
+function displayTime() {
+    const date = new Date();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    const time = `${hours}:${minutes}:${seconds}`;
+    document.getElementById('clock').innerText = time;
+
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const fullDate = `${day}/${month}/${year}`;
+    document.getElementById('date').innerText = fullDate;
+
+    // Contoh jadwal sholat
+    const prayTimes = ["Subuh: 03:55", "Dzuhur: 11:39", "Ashar: 15:06", "Maghrib: 17:56", "Isya: 19:12"];
+    let praySchedule = "Jadwal Sholat:\n";
+    prayTimes.forEach(pray => {
+        praySchedule += pray + "\n";
+    });
+    document.getElementById('prayTime').innerText = praySchedule;
+}
+
+// Refresh setiap detik
+setInterval(displayTime, 1000);
+
+// Memanggil fungsi untuk pertama kali
+displayTime();
+</script>
+</body>
+</html>
